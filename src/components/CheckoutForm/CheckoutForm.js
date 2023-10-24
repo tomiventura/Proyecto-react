@@ -17,7 +17,7 @@ const CheckoutForm = ({ onConfirm }) => {
 
     return (
         <div>
-            <form onSubmit={handleConfirm}>
+            <form onSubmit={handleOnConfirm}>
                 <label>
                     Nombre
                     <input 
@@ -49,3 +49,5 @@ const CheckoutForm = ({ onConfirm }) => {
         </div>
     )
 }
+
+export default CheckoutForm

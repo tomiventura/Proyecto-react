@@ -1,8 +1,21 @@
 import { db } from "../../firebase/config"
-
+import { useState } from "react"
+import { useContext } from "react"
 import CheckoutForm from '../CheckoutForm/CheckoutForm'
+import { CartContext } from "../../context/CartContext"
+import { Timestamp } from "firebase/firestore"
+import { writeBatch } from "firebase/firestore"
+import { collection } from "firebase/firestore"
+import { getDocs } from "firebase/firestore"
+import { query } from "firebase/firestore"
+import { where } from "firebase/firestore"
+import { documentId } from "firebase/firestore"
+import { addDoc } from "firebase/firestore"
 
-const Checkout = () => {
+
+
+
+export const Checkout = () => {
     const [loading, setLoading] = useState(false)
     const [orderId, setOrderId] = useState('')
 
@@ -25,11 +38,11 @@ const Checkout = () => {
 
             const outOfStock = []
 
-            const ids = cart.map(prod => prod.id)
+            const ids = cart.map(prod => prod.name)
 
             const productsRef = collection(db, 'products')
 
-            const productsAddedFromFirestore = await getDocs(query(productsRef, Where(documentId(), 'in', id)))
+            const productsAddedFromFirestore = await getDocs(query(productsRef, where(documentId(), 'in', name)))
 
             const { docs } = productsAddedFromFirestore
 
