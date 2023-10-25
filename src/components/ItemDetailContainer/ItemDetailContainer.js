@@ -12,7 +12,7 @@ const ItemDetailContainer = () => {
     useEffect(() => {
         setLoading(true)
 
-        doc(db, 'products', itemId)
+        getDoc(doc(db, 'productos', itemId))
 
             .then(response => {
                 const data = response.data()
